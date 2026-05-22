@@ -1,11 +1,9 @@
-// Migrated to Built-in Kotlin (Flutter 3.27+): el host (Flutter) inyecta
-// org.jetbrains.kotlin.android centralmente, así que no declaramos ni
-// classpath de KGP ni `apply plugin: 'kotlin-android'` acá.
-// El bloque plugins{} debe ser el primer statement del script — group y
-// version van después.
+// Built-in Kotlin (Flutter 3.44+): el host aplica org.jetbrains.kotlin.android
+// automáticamente, NO declaramos el id ni `apply plugin` acá. Tampoco va
+// `kotlinOptions` adentro del bloque android — se reemplaza por un bloque
+// kotlin {} top-level con compilerOptions.
 plugins {
     id "com.android.library"
-    id "org.jetbrains.kotlin.android"
 }
 
 group = "com.xiao.flutter_simple_bluetooth_printer"
@@ -20,16 +18,18 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-    }
-
     sourceSets {
         main.java.srcDirs += "src/main/kotlin"
     }
 
     defaultConfig {
         minSdk = 21
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
     }
 }
 
