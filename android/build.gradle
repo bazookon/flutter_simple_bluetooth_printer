@@ -1,13 +1,15 @@
-group = "com.xiao.flutter_simple_bluetooth_printer"
-version = "1.0-SNAPSHOT"
-
 // Migrated to Built-in Kotlin (Flutter 3.27+): el host (Flutter) inyecta
 // org.jetbrains.kotlin.android centralmente, así que no declaramos ni
 // classpath de KGP ni `apply plugin: 'kotlin-android'` acá.
+// El bloque plugins{} debe ser el primer statement del script — group y
+// version van después.
 plugins {
     id "com.android.library"
     id "org.jetbrains.kotlin.android"
 }
+
+group = "com.xiao.flutter_simple_bluetooth_printer"
+version = "1.0-SNAPSHOT"
 
 android {
     namespace = "com.xiao.flutter_simple_bluetooth_printer"
