@@ -1,21 +1,40 @@
-// Built-in Kotlin (Flutter 3.44+): el host aplica org.jetbrains.kotlin.android
-// automáticamente, NO declaramos el id ni `apply plugin` acá. Tampoco va
-// `kotlinOptions` adentro del bloque android — se reemplaza por un bloque
-// kotlin {} top-level con compilerOptions.
-plugins {
-    id "com.android.library"
-}
-
 group = "com.xiao.flutter_simple_bluetooth_printer"
 version = "1.0-SNAPSHOT"
 
+buildscript {
+    ext.kotlin_version = "1.8.10"
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.2.2")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+
 android {
     namespace = "com.xiao.flutter_simple_bluetooth_printer"
-    compileSdk = 35
+    compileSdk = 34
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     sourceSets {
@@ -27,13 +46,7 @@ android {
     }
 }
 
-kotlin {
-    compilerOptions {
-        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
-    }
-}
-
 dependencies {
     implementation "com.polidea.rxandroidble3:rxandroidble:1.17.2"
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
+    implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
 }
